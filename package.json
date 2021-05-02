@@ -1,0 +1,36 @@
+{
+  "name": "@basti0nz/tfselect",
+  "version": "0.1.1",
+  "description": "The `tfselect` command line tool lets you select version of terraform",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "postinstall": "go-npm install",
+    "preuninstall": "go-npm uninstall"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basti0nz/tfselect.git"
+  },
+  "keywords": [
+    "terraform",
+    "cli",
+    "automation"
+  ],
+  "author": "Valentyn Nastenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/basti)nz/tfselect/issues"
+  },
+  "homepage": "https://github.com/basti0nz/tfselect#readme",
+  "dependencies": {
+    "go-npm": "^0.1.9"
+  },
+  "goBinary": {
+    "name": "tfselect",
+    "path": "/usr/local/bin",
+    "url": "https://github.com/basti0nz/tfselect/releases/download/{{version}}/tfselect_{{version}}_{{platform}}_{{arch}}.tar.gz"
+  }
+}
