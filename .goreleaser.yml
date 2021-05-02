@@ -11,11 +11,10 @@ builds:
   - ldflags:
       - -s -w -X "main.version={{ .Version }}"
   - main: main.go
-    binary: tfswitch
-    id: tfswitch
+    binary: tfselect
+    id: tfselect
     goos:
       - linux
-      - windows
       - darwin
     goarch:
       - amd64
@@ -23,8 +22,8 @@ builds:
 nfpms:
   - 
     description: |
-      The `tfswitch` command line tool lets you switch between different versions of terraform(https://www.terraform.io/).
-      If you do not have a particular version of terraform installed, `tfswitch` will download the version you desire.
+      The `tfselect` command line tool lets you select version of terraform(https://www.terraform.io/).
+      If you do not have a particular version of terraform installed, `tfselect` will download the version you desire.
       The installation is minimal and easy.
       Once installed, simply select the version you require from the dropdown and start using terraform.
     license: MIT
@@ -36,12 +35,12 @@ nfpms:
 
 snapcrafts:
   - 
-    id: tfswitch
+    id: tfselect
     publish: false
     summary: A command line tool to switch between different versions of terraform
     description: |
-      The `tfswitch` command line tool lets you switch between different versions of terraform(https://www.terraform.io/).
-      If you do not have a particular version of terraform installed, `tfswitch` will download the version you desire.
+      The `tfselect` command line tool lets you switch between different versions of terraform(https://www.terraform.io/).
+      If you do not have a particular version of terraform installed, `tfselect` will download the version you desire.
       The installation is minimal and easy.
       Once installed, simply select the version you require from the dropdown and start using terraform.
     base: core18
@@ -66,11 +65,11 @@ archives:
   -
     # ID of this archive.
     # Defaults to `default`.
-    id: tfswitch
+    id: tfselect
 
     # Builds reference which build instances should be archived in this archive.
     builds:
-      - tfswitch
+      - tfselect
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format: tar.gz
 
@@ -83,28 +82,28 @@ archives:
 
 brews:
   -
-    name: tfswitch
+    name: tfselect
     ids:
-      - tfswitch
+      - tfselect
 
     tap:
-      owner: versus
+      owner: basti0nz
       name: homebrew-tap
 
     commit_author:
       name: versus
       email: versus.dev@gmail.com
     folder: Formula
-    caveats: "Type 'tfswitch' on your command line and choose the terraform version that you want from the dropdown. This command currently only works on MacOs and Linux"
-    homepage: "https://versus.github.io/terraform-switcher"
-    description: "The tfswitch command lets you switch between terraform versions."
+    caveats: "Type 'tfselect' on your command line and choose the terraform version that you want from the dropdown. This command currently only works on MacOs and Linux"
+    homepage: "https://basti0nz.github.io/tfselect"
+    description: "The tfselect command lets you select terraform versions."
     skip_upload: false
 
     conflicts:
       - terraform
 
     test: |
-      system "#{bin}/tfswitch --version"
+      system "#{bin}/tfselect --version"
 
     install: |
-      bin.install "tfswitch"
+      bin.install "tfselect"

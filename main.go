@@ -22,7 +22,7 @@ import (
 
 const (
 	defaultPath = "/usr/local/bin/terraform" //default bin installation dir
-	version     = "tfselect 0.1.2\n"
+	version     = "tfselect 0.1.3\n"
 )
 
 //var version string
