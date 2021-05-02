@@ -12,7 +12,6 @@ builds:
       - -s -w -X "main.version={{ .Version }}"
   - main: main.go
     binary: tfselect
-    id: tfselect
     goos:
       - linux
       - darwin
@@ -35,7 +34,6 @@ nfpms:
 
 snapcrafts:
   - 
-    id: snap
     publish: false
     summary: A command line tool to switch between different versions of terraform
     description: |
@@ -63,19 +61,11 @@ changelog:
 
 archives:
   -
-    # ID of this archive.
-    # Defaults to `default`.
-    id: tfselect
 
     # Builds reference which build instances should be archived in this archive.
-    builds:
-      - tfselect
+
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format: tar.gz
-
-    format_overrides:
-      - goos: windows
-        format: zip
 
     files:
       - LICENSE
@@ -83,9 +73,7 @@ archives:
 brews:
   -
     name: tfselect
-    ids:
-      - tfselect
-      - snap
+
 
     tap:
       owner: basti0nz
