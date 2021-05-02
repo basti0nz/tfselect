@@ -48,3 +48,4 @@ version.tf
 .env
 node_modules/**
 
+dist/

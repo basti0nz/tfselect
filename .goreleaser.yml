@@ -1,43 +1,76 @@
-# This is an example goreleaser.yaml file with some sane defaults.
+# This is an example .goreleaser.yml file with some sane defaults.
 # Make sure to check the documentation at http://goreleaser.com
 before:
   hooks:
     # You may remove this if you don't use go modules.
-    - go mod download
+    - go mod tidy
     # you may remove this if you don't need go generate
     - go generate ./...
-
 builds:
-  - ldflags:
-      - -s -w -X "main.version={{ .Version }}"
-  - main: main.go
+  - env:
+      - CGO_ENABLED=0
     binary: tfselect
-    id: tfselect
+    ldflags:
+      - -s -w -X "main.version={{ .Version }}"
     goos:
       - linux
       - darwin
     goarch:
       - amd64
 
+nfpms:
+  -
+    description: |
+      The `tfselect` command line tool lets you switch between different versions of terraform(https://www.terraform.io/).
+      If you do not have a particular version of terraform installed, `tfselect` will download the version you desire.
+      The installation is minimal and easy.
+      Once installed, simply select the version you require from the dropdown and start using terraform.
+    license: MIT
+    formats:
+    - deb
+    - rpm
+    dependencies:
+    - git
+
+snapcrafts:
+  -
+    id: tfselect
+    publish: false
+    summary: A command line tool to switch between different versions of terraform
+    description: |
+      The `tfselect` command line tool lets you switch between different versions of terraform(https://www.terraform.io/).
+      If you do not have a particular version of terraform installed, `tfselect` will download the version you desire.
+      The installation is minimal and easy.
+      Once installed, simply select the version you require from the dropdown and start using terraform.
+    base: core18
+
+    grade: stable
+    confinement: strict
+
+    license: MIT
 
 archives:
-  -
-    # ID of this archive.
-    # Defaults to `default`.
-    id: tfselect
-
-    # Builds reference which build instances should be archived in this archive.
-    builds:
-      - tfselect
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    format: tar.gz
-
-    format_overrides:
-      - goos: windows
-        format: zip
-
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
     files:
       - LICENSE
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}"
+  
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
 
 brews:
   -
