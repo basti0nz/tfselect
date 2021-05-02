@@ -1,0 +1,5 @@
+1. toml files
+2. install bash script like https://github.com/canha/golang-tools-install-script
+3. npm installer
+4. goreleaser from gitaction
+5. change UI

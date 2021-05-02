@@ -37,7 +37,7 @@ nfpms:
 snapcrafts:
   -
     id: tfselect
-    publish: false
+    publish: true
     summary: A command line tool to switch between different versions of terraform
     description: |
       The `tfselect` command line tool lets you switch between different versions of terraform(https://www.terraform.io/).

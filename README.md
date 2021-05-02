@@ -19,12 +19,6 @@ Installation for MacOS/Linux is the easiest with Homebrew. [If you do not have h
 brew install basti0nz/tap/tfselect
 ```
 
-### NPM
-
-```sh
-npm i @versusdev/tfselect
-```
-
 ### Linux
 
 Installation for other linux operation systems.
@@ -34,6 +28,8 @@ curl -L https://raw.githubusercontent.com/basti0nz/tfselect/release/install.sh |
 ```
 
 ### Build and install SNAP package
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/tfselect)
 
 ```bash
 snap install snapcraft --classic
