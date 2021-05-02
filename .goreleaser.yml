@@ -7,7 +7,9 @@ before:
     # you may remove this if you don't need go generate
     - go generate ./...
 builds:
-  - env:
+  - 
+    id: tfselect
+    env:
       - CGO_ENABLED=0
     binary: tfselect
     ldflags:
@@ -50,15 +52,23 @@ snapcrafts:
     license: MIT
 
 archives:
-  - replacements:
-      darwin: Darwin
-      linux: Linux
-      windows: Windows
-      386: i386
-      amd64: x86_64
+  -
+    # ID of this archive.
+    # Defaults to `default`.
+    id: tfselect
+
+    # Builds reference which build instances should be archived in this archive.
+    builds:
+      - tfselect
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format: tar.gz
+
+    format_overrides:
+      - goos: windows
+        format: zip
+
     files:
       - LICENSE
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
 checksum:
   name_template: 'checksums.txt'
@@ -77,11 +87,9 @@ brews:
     name: tfselect
     ids:
       - tfselect
-
     tap:
       owner: basti0nz
       name: homebrew-tap
-
     commit_author:
       name: versus
       email: versus.dev@gmail.com
