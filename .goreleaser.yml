@@ -35,7 +35,7 @@ nfpms:
 
 snapcrafts:
   - 
-    id: tfselect
+    id: snap
     publish: false
     summary: A command line tool to switch between different versions of terraform
     description: |
@@ -85,6 +85,7 @@ brews:
     name: tfselect
     ids:
       - tfselect
+      - snap
 
     tap:
       owner: basti0nz
