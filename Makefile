@@ -1,6 +1,6 @@
 EXE  := tfselect
 PKG  := github.com/basti0nz/tfselect
-VER := 0.1.1
+VER := 0.1.2
 PATH := build:$(PATH)
 GOOS ?= $(shell go env GOOS)
 GOARCH ?= $(shell go env GOARCH)
@@ -29,10 +29,6 @@ darwin linux:
 .PHONY: clean
 clean:
 	rm -rf ./dist/
-
-.PHONY: docs
-docs:
-	cd docs; bundle install --path vendor/bundler; bundle exec jekyll build -c _config.yml; cd ..
 
 .PHONY: snap
 snap:
