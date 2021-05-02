@@ -85,7 +85,7 @@ brews:
     commit_author:
       name: versus
       email: versus.dev@gmail.com
-    folder: Formula
+    folder: Casks
     caveats: "Type 'tfselect' on your command line and choose the terraform version that you want from the dropdown. This command currently only works on MacOs and Linux"
     homepage: "https://basti0nz.github.io/tfselect"
     description: "The tfselect command lets you select terraform versions."
