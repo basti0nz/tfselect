@@ -12,60 +12,29 @@ builds:
       - -s -w -X "main.version={{ .Version }}"
   - main: main.go
     binary: tfselect
+    id: tfselect
     goos:
       - linux
       - darwin
     goarch:
       - amd64
 
-nfpms:
-  - 
-    description: |
-      The `tfselect` command line tool lets you select version of terraform(https://www.terraform.io/).
-      If you do not have a particular version of terraform installed, `tfselect` will download the version you desire.
-      The installation is minimal and easy.
-      Once installed, simply select the version you require from the dropdown and start using terraform.
-    license: MIT
-    formats:
-    - deb
-    - rpm
-    dependencies:
-    - git
-
-snapcrafts:
-  - 
-    publish: false
-    summary: A command line tool to switch between different versions of terraform
-    description: |
-      The `tfselect` command line tool lets you switch between different versions of terraform(https://www.terraform.io/).
-      If you do not have a particular version of terraform installed, `tfselect` will download the version you desire.
-      The installation is minimal and easy.
-      Once installed, simply select the version you require from the dropdown and start using terraform.
-    base: core18
-
-    grade: stable
-    confinement: strict
-
-    license: MIT
-
-checksum:
-  name_template: "{{ .ProjectName }}_checksums.txt"
-  algorithm: sha256
-
-changelog:
-  sort: asc
-  filters:
-    exclude:
-      - '^docs:'
-      - '^test:'
 
 archives:
   -
+    # ID of this archive.
+    # Defaults to `default`.
+    id: tfselect
 
     # Builds reference which build instances should be archived in this archive.
-
+    builds:
+      - tfselect
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format: tar.gz
+
+    format_overrides:
+      - goos: windows
+        format: zip
 
     files:
       - LICENSE
@@ -73,7 +42,8 @@ archives:
 brews:
   -
     name: tfselect
-
+    ids:
+      - tfselect
 
     tap:
       owner: basti0nz
