@@ -1,5 +1,7 @@
 # TFselect
 
+[![CI](https://github.com/basti0nz/tfselect/actions/workflows/main.yml/badge.svg)](https://github.com/basti0nz/tfselect/actions/workflows/main.yml)
+
 Inspired by  [warrensbox/terraform-switcher](https://github.com/warrensbox/terraform-switcher)
 
 The `tfselect` command line tool lets you switch between different versions of [terraform](https://www.terraform.io/).
