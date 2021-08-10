@@ -27,6 +27,7 @@
   "homepage": "https://github.com/basti0nz/tfselect#readme",
   "dependencies": {
     "go-npm": "^0.1.9"
+    "tar": ">=3.2.3"
   },
   "goBinary": {
     "name": "tfselect",
