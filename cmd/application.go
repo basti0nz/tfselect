@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/user"
 	"strings"
 
 	"github.com/basti0nz/tfselect/lib"
@@ -93,4 +94,12 @@ func UsageMessage() {
 	getopt.PrintUsage(os.Stderr)
 	fmt.Println("Supply the terraform version as an argument, or choose from a menu")
 	os.Exit(0)
+}
+
+func IsUserRoot() bool {
+	currentUser, err := user.Current()
+	if err != nil {
+		log.Fatalf("[isRoot] Unable to get current user: %s", err)
+	}
+	return currentUser.Username == "root"
 }

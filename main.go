@@ -15,6 +15,9 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/user"
+	"path/filepath"
+	"strings"
 
 	"github.com/basti0nz/tfselect/cmd"
 	"github.com/pborman/getopt"
@@ -22,7 +25,7 @@ import (
 
 const (
 	defaultPath = "/usr/local/bin/terraform" //default bin installation dir
-	version     = "tfselect 0.1.14\n"
+	version     = "tfselect 0.1.16\n"
 )
 
 //var version string
@@ -48,8 +51,7 @@ func main() {
 	if len(args) > 1 || *helpFlag {
 		cmd.UsageMessage()
 	}
-
-	fmt.Println(version)
+	fmt.Print(version)
 	if *programVersionFlag {
 		os.Exit(0)
 	}
@@ -69,7 +71,12 @@ func main() {
 	}
 
 	if *customBinPathFlag != "" {
-		path = *customBinPathFlag
+		newPath := *customBinPathFlag
+		if strings.HasPrefix(newPath, "~/") {
+			usr, _ := user.Current()
+			dir := usr.HomeDir
+			path = filepath.Join(dir, newPath[2:])
+		}
 		if tfversion == "" {
 			v, err := cmd.GetInstalledVersion(*customBinPathFlag)
 			if err == nil {
@@ -87,8 +94,8 @@ func main() {
 		createSymlink = false
 	}
 
-	//fmt.Println("tfversion=", tfversion)
-	//fmt.Println("path=", path)
+	//	fmt.Println("tfversion=", tfversion)
+	//	fmt.Println("path=", path)
 
 	if *removeFlag {
 		if len(args) == 1 {

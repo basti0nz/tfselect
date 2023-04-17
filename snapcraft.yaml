@@ -31,8 +31,8 @@ parts:
     go-importpath: github.com/bastionz/tfselect
     build-packages:
       - gcc-multilib
-    go-buildtags:
-      - tfswitch
+#    go-buildtags:
+#      - tfswitch
     override-build: 
       go build  -o ../install/bin/tfselect
 

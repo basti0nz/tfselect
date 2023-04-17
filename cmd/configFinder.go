@@ -28,6 +28,7 @@ const (
 )
 
 func GetConfigVariable() (string, string) {
+	var path string
 	exist, tfversion, path := findConfig()
 	if exist == true {
 		if path == "" {
@@ -38,12 +39,24 @@ func GetConfigVariable() (string, string) {
 		}
 		return tfversion, path
 	}
-	var err error
-	tfversion, err = GetInstalledVersion(defaultBin)
-	if err != nil {
-		return "", defaultBin
+
+	if IsUserRoot() {
+		path = defaultBin
+	} else {
+		dirname, err := os.UserHomeDir()
+		if err != nil {
+			fmt.Println("Error: ", err)
+		}
+		if _, err := os.Stat(dirname + "/.bin/"); !os.IsNotExist(err) {
+			path = dirname + "/.bin/terraform"
+		} else if _, err := os.Stat(dirname + "/bin/"); !os.IsNotExist(err) {
+			path = dirname + "/bin/terraform"
+		} else {
+			fmt.Println("Error: Cannot find terraform binary path include `bin` and `.bin` in your home directory. Use flag -b to custom binary path.")
+			os.Exit(1)
+		}
 	}
-	return tfversion, defaultBin
+	return "", path
 }
 
 func GetInstalledVersion(bin string) (string, error) {
@@ -92,7 +105,7 @@ func findConfig() (bool, string, string) {
 	return false, "", ""
 }
 
-//TODO: refactoring for support  .tfswitch.toml and tfselect.toml
+// TODO: refactoring for support  .tfswitch.toml and tfselect.toml
 func checkToml(dir string) (bool, string, string) {
 	configfile := dir + fmt.Sprintf("/%s", tomlFilename) //settings for .tfselect.toml file in current directory (option to specify bin directory)
 	if _, err := os.Stat(configfile); err == nil {

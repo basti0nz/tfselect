@@ -1,6 +1,6 @@
 EXE  := tfselect
 PKG  := github.com/basti0nz/tfselect
-VER := 0.1.14
+VER := 0.1.16
 PATH := build:$(PATH)
 GOOS ?= $(shell go env GOOS)
 GOARCH ?= $(shell go env GOARCH)
