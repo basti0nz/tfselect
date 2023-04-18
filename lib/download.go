@@ -17,10 +17,16 @@ func DownloadFromURL(installLocation string, url string) (string, error) {
 	fmt.Println("Download ", url)
 	fileName = installLocation + fileName
 	req, _ := http.NewRequest("GET", url, nil)
-	resp, _ := http.DefaultClient.Do(req)
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return "", err
+	}
 	defer resp.Body.Close()
 
-	f, _ := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return "", err
+	}
 	defer f.Close()
 
 	bar := progressbar.DefaultBytes(

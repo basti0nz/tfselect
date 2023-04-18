@@ -19,6 +19,11 @@ builds:
       - darwin
     goarch:
       - amd64
+      - arm
+      - arm64
+
+universal_binaries:
+  - replace: true
 
 nfpms:
   -
