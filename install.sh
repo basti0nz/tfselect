@@ -10,11 +10,7 @@ fi
 OS=`/usr/bin/uname -s`
 ARCH=$(uname -m)
 if [[ $OS == "Darwin" ]]; then
-  if [[ $ARCH == "arm64" ]]; then
-    PLATFORM="darwin_arm64"
-  else
-    PLATFORM="darwin"
-  fi
+    PLATFORM="darwin_all"
 elif [[ $OS == "Linux" ]]; then
   if [[ $ARCH == "x86_64" ]]; then
     PLATFORM="linux"
